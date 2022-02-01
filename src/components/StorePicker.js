@@ -1,37 +1,29 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { getFunName } from "../helpers";
-class StorePicker extends Component {
-  //   //run before the component is rendered
-  //   constructor() {
-  //     super();
-  //     //bind with component
-  //     this.goToStore = this.goToStore.bind(this);
-  //   }
-  storeInput = React.createRef();
-  goToStore = (event) => {
-    //stop the form from submitting
-    event.preventDefault();
-    console.log(this.storeInput.current.value);
-    // get the text from the input
-    const storeName = this.storeInput.current.value;
-    //redirect to /store/:storeId
-    this.props.history.push(`/store/${storeName}`);
+const StorePicker = () => {
+  let history = useHistory();
+  const [storeName, setStoreName] = useState(getFunName());
+  const handleNameInput = (e) => {
+    setStoreName(e.target.value);
   };
-
-  render() {
-    return (
-      <form className="store-selector" onSubmit={this.goToStore}>
-        <h2>Enter A Store</h2>
-        <input
-          type="text"
-          required
-          ref={this.storeInput}
-          placeholder="Store Name"
-          defaultValue={getFunName()}
-        />
-        <button type="submit">Visit Store</button>
-      </form>
-    );
-  }
-}
+  const gotoStore = (e) => {
+    e.preventDefault();
+    console.log(storeName);
+    history.push(`/store/${storeName}`);
+  };
+  return (
+    <form className="store-selector" onSubmit={gotoStore}>
+      <h2>Enter A Store</h2>
+      <input
+        type="text"
+        required
+        value={storeName}
+        placeholder="Store Name"
+        onChange={handleNameInput}
+      />
+      <button type="submit">Visit Store</button>
+    </form>
+  );
+};
 export default StorePicker;
