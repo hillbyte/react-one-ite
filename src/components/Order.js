@@ -35,7 +35,7 @@ const Order = (props) => {
 
   return (
     <div className="order-wrap">
-      <h3>Your Orders</h3>
+      <h3>Your Cart</h3>
       <ul className="order">{orderId.map(renderOrder)}</ul>
       <p>total amount: {formatPrice(total)}</p>
     </div>

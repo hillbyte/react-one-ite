@@ -49,7 +49,7 @@ const EditFish = (props) => {
     </form>
   );
 };
-
+// PropTypes
 EditFish.propTypes = {
   fish: propTypes.shape({
     name: propTypes.string,
